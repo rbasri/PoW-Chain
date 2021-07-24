@@ -8,6 +8,9 @@ class Blockchain {
   blockHeight() {
     return this.blocks.length;
   }
+  lastBlock() {
+    return this.blocks[this.blocks.length-1];
+  }
 }
 
 module.exports = Blockchain;

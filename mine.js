@@ -23,7 +23,13 @@ function stopMining() {
 function mine() {
   if(!mining) return;
   if(mempool.length > 0 || utxos.length === 0){
-    const block = new Block();
+    let block;
+    if(db.blockchain.blockHeight() > 0){
+      block = new Block(db.blockchain.lastBlock().hash());
+    }
+    else{
+      block = new Block("genesis");
+    }
     let i;
     for(i =0; i<TX_PER_BLOCK && mempool.length>0; i++){
       block.addTransaction(mempool.pop());

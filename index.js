@@ -34,7 +34,6 @@ app.post('/', (req, res) => {
       res.send({ balance: sum.toString()});
   }
   if(method === "addTransaction"){
-      console.log(params);
       const [addressFrom, addressTo, amount] = params;
       const ourUTXOs = utxos.filter(x => {
         return x.owner === addressFrom && !x.spent;
