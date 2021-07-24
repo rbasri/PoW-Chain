@@ -34,8 +34,8 @@ app.post('/', (req, res) => {
       res.send({ balance: sum.toString()});
   }
   if(method === "addTransaction"){
-      console.log("got here");
-      const [addressFrom, addressTo, amount] = [PUBLIC_KEY, "51234135", 5];
+      console.log(params);
+      const [addressFrom, addressTo, amount] = params;
       const ourUTXOs = utxos.filter(x => {
         return x.owner === addressFrom && !x.spent;
       })
@@ -48,7 +48,7 @@ app.post('/', (req, res) => {
       }
       outputUTXOs = [new UTXO(addressTo, amount), new UTXO(addressFrom, amount+leftToSend)];
       mempool.push(new Transaction(inputUTXOs, outputUTXOs));
-      res.send("success");
+      res.send({});
   }
 });
 
